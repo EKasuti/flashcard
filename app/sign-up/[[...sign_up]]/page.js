@@ -1,19 +1,18 @@
 import { SignIn, SignUp } from "@clerk/nextjs";
 import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function SignUpPage(){
     return (
-        <Container maxWidth="100vw">
-            <AppBar position="static" sx={{backgroundColor: '#3f51b5'}}>
+        <Container maxWidth="100vw" disableGutters>
+            <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
                 <Toolbar>
-                    <Typography variant="h6" sx={{flexGrow:1}}>Flashcard SaaS</Typography>
-                    <Button color="inherit">
-                        <Link href="/sign-in">Login</Link>
-                    </Button>
-                    <Button color="inherit">
-                        <Link href="/sign-up">Signup</Link>
-                    </Button>
+                    <Image src="/logo.png" alt="Logo" width={50} height={50} />
+                    <Typography variant="h6" style={{ flexGrow: 1, color: 'black' }}>SmartFlash </Typography>
+                 
+                    <Button variant="contained" href="/sign-up" sx={{ mt: 2, mr:2, mb:2, backgroundColor: 'gray', '&:hover': { backgroundColor: 'darkblue' } }}>Sign Up</Button>
+                    <Button variant="contained" href="/sign-in" sx={{ mt: 2, mb:2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }}>Login</Button>
                 </Toolbar>
             </AppBar>
 

@@ -98,7 +98,7 @@ function Generate() {
                         variant="outlined"
                         sx={{mb:2}}
                     />
-                    <Button variant="contained" color="primary" onClick={handleSubmit} fullWidth>
+                    <Button variant="contained" sx={{ mt: 2, mb:2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }} onClick={handleSubmit} fullWidth>
                         Submit
                     </Button>
                 </Paper>
@@ -164,7 +164,7 @@ function Generate() {
                         ))}
                     </Grid>
                     <Box sx={{mt:4, display:"flex", justifyContent:'center'}}>
-                        <Button variant="contained" color="secondary" onClick={handleOpen}> Save</Button>
+                        <Button variant="contained" sx={{ mt: 2, mb:2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }} onClick={handleOpen} fullWidth> Save</Button>
                     </Box>
                 </Box>
             )}

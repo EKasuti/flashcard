@@ -56,8 +56,9 @@ export default function Home() {
           <Image src="/logo.png" alt="Logo" width={50} height={50} />
           <Typography variant="h6" style={{ flexGrow: 1, color: 'black' }}>SmartFlash </Typography>
           <SignedOut>
-            <Button color="inherit" href="/sign-in" sx={{ color: 'black' }}>Login</Button>
-            <Button color="inherit" href="/sign-up" sx={{ color: 'black' }}>Sign Up</Button>
+           
+            <Button variant="contained" href="/sign-up" sx={{ mt: 2, mr:2, mb:2, backgroundColor: 'gray', '&:hover': { backgroundColor: 'darkblue' } }}>Sign Up</Button>
+            <Button variant="contained" href="/sign-in" sx={{ mt: 2, mb:2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }}>Login</Button>
           </SignedOut>
 
           {/* If signed in */}
@@ -82,7 +83,7 @@ export default function Home() {
 
         <Typography variant="h6" gutterBottom>Start your journey today and discover how easy and fun learning can be!</Typography>
 
-        <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleGetStarted}> Get Started</Button>
+        <Button variant="contained" sx={{ mt: 2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }} onClick={handleGetStarted}> Get Started</Button>
       </Box>
 
       {/* Features Section */}
@@ -146,7 +147,7 @@ export default function Home() {
         <Typography variant="h5" gutterBottom>Choose the Plan That Fits You Best</Typography>
         <Grid container spacing={4}>
           {/* Pricing 1: Free Plan */}
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Box sx={{ p: 3, border: '1px solid', borderColor: 'grey.300', borderRadius: 2 }}>
               <Typography variant="h5" gutterBottom>Free Plan</Typography>
               <Typography variant="h6" gutterBottom>$0 / Month</Typography>
@@ -154,39 +155,26 @@ export default function Home() {
               <Typography gutterBottom>Create up to 50 flashcards</Typography>
               <Typography gutterBottom>Limited to 2 shared decks</Typography>
               <Typography gutterBottom>Basic study modes</Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }}>Choose Basic</Button>
+              <Button variant="contained" sx={{ mt: 2, backgroundColor: 'gray', '&:hover': { backgroundColor: 'darkblue' } }}>Current Plan</Button>
             </Box>
           </Grid>
 
           {/* Pricing 2 */}
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Box sx={{ p: 3, border: '1px solid', borderColor: 'grey.300', borderRadius: 2 }}>
-              <Typography variant="h5" gutterBottom>Standard Plan</Typography>
-              <Typography variant="h6" gutterBottom>$4.99 / Month</Typography>
+              <Typography variant="h5" gutterBottom>Premium Plan</Typography>
+              <Typography variant="h6" gutterBottom>$10 / Month</Typography>
               <Typography gutterBottom>Everything in the Free Plan</Typography>
+              <Typography gutterBottom>Early access to new features</Typography>
               <Typography gutterBottom>Create unlimited flashcards</Typography>
-              <Typography gutterBottom>Advanced study modes</Typography>
               <Typography gutterBottom>Priority Support</Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
+              <Button variant="contained" sx={{ mt: 2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }} onClick={handleSubmit}>
                 Choose Pro
               </Button>
             </Box>
           </Grid>
 
-          {/* Pricing 3: Premium Plan */}
-          <Grid item xs={12} md={4}>
-            <Box sx={{ p: 3, border: '1px solid', borderColor: 'grey.300', borderRadius: 2 }}>
-              <Typography variant="h5" gutterBottom>Premium Plan</Typography>
-              <Typography variant="h6" gutterBottom>$14.99 / Month</Typography>
-              <Typography gutterBottom>Everything in Standard Plan</Typography>
-              <Typography gutterBottom>Offline access to all decks</Typography>
-              <Typography gutterBottom>Enhanced progress tracking</Typography>
-              <Typography gutterBottom>Early access to new features</Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={handleSubmit}>
-                Choose Pro
-              </Button>
-            </Box>
-          </Grid>
+         
         </Grid>
       </Box>
     </Container>
