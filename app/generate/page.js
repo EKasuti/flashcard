@@ -1,11 +1,13 @@
 'use client'
 
-import { useUser } from "@clerk/nextjs"
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs"
 import { db } from "@/firebase"
-import { Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, TextField, Typography } from "@mui/material"
+import { AppBar, Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Grid, Paper, TextField, Toolbar, Typography } from "@mui/material"
 import { writeBatch, doc, collection, getDoc, setDoc } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import Image from "next/image"
+
 
 function Generate() {
     const { isLoaded, isSignedIn, user } = useUser()
@@ -88,9 +90,23 @@ function Generate() {
         handleClose()
         router.push('/flashcards')
     }
+    const navigateToFlashcards = () => {
+        router.push('/flashcards')
+    }
 
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="100vw" disableGutters>
+            <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)'}}>
+                <Toolbar>
+                    <Image src="/logo.png" alt="Logo" width={50} height={50} />
+                    <Typography variant="h6" style={{ flexGrow: 1, color: 'black' }}>SmartFlash</Typography>
+
+                    {/* If signed in */}
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
+                </Toolbar>
+            </AppBar>
             <Box sx={{
                 mt:4, mb:6, display: 'flex', flexDirection: 'column', alignItems:'center', textAlign: 'center'
             }}>
@@ -212,8 +228,16 @@ function Generate() {
                     <Button onClick={handleClose}> Cancel</Button>
                     <Button onClick={saveFlashcards}>Save</Button>
                 </DialogActions>
-
             </Dialog>
+
+            <Button 
+                color="primary" 
+                aria-label="navigate" 
+                sx={{ position: 'fixed', bottom: 16, right: 16, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' }, color: 'white'}} 
+                onClick={navigateToFlashcards}
+            >
+                Flashcards
+            </Button>
         </Container>
     )
 }
