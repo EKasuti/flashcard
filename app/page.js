@@ -3,6 +3,7 @@ import getStipe from "@/utils/get-stripe";
 import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import { AppBar, Button, Toolbar, Typography, Container, Box, Grid } from "@mui/material";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -43,19 +44,20 @@ export default function Home() {
   }
 
   return (
-    <Container maxWidth="100vw">
+    <Container maxWidth="100vh" disableGutters>
       <Head>
         <title>Flashcard SaaS</title>
         <meta name="description" content="Create flashcard from your text" />
       </Head>
 
       {/* NAVBAR */}
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: 'white', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
         <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>SmartFlash </Typography>
+          <Image src="/logo.png" alt="Logo" width={50} height={50} />
+          <Typography variant="h6" style={{ flexGrow: 1, color: 'black' }}>SmartFlash </Typography>
           <SignedOut>
-            <Button color="inherit" href="/sign-in">Login</Button>
-            <Button color="inherit" href="/sign-up">Sign Up</Button>
+            <Button color="inherit" href="/sign-in" sx={{ color: 'black' }}>Login</Button>
+            <Button color="inherit" href="/sign-up" sx={{ color: 'black' }}>Sign Up</Button>
           </SignedOut>
 
           {/* If signed in */}
