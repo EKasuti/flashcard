@@ -1,12 +1,24 @@
 'use client'
 import getStipe from "@/utils/get-stripe";
-import { SignedIn, SignedOut, UserButton, userButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton, userButton, useUser } from "@clerk/nextjs";
 import { AppBar, Button, Toolbar, Typography, Container, Box, TablePagination, Grid } from "@mui/material";
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 
 
 
 export default function Home() {
+  const { isLoaded, isSignedIn } = useUser();
+  const router = useRouter();
+
+  const handleGetStarted=()=>{
+    if (!isSignedIn){
+      alert("You can only generate cards if you are logged in. Redirecting to login page...");
+      router.push('/sign-in');
+    } else{
+      router.push('/generate');
+    }
+  }
   const handleSubmit = async ()=>{
     const checkoutSession = await fetch('/api/checkout_session', {
       method: 'POST',
@@ -41,7 +53,7 @@ export default function Home() {
         {/* NAVBAR */}
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" style={{flexGrow:1}}>Flashcard Saas </Typography>
+            <Typography variant="h6" style={{flexGrow:1}}>SmartFlash </Typography>
             <SignedOut>
               <Button color="inherit" href="/sign-in">Login</Button>
               <Button color="inherit" href="/sign-up">Sign Up</Button>
@@ -61,10 +73,15 @@ export default function Home() {
           }}
         >
 
-          <Typography variant="h2" gutterBottom> Welcome to Flashcard Saas</Typography>
-          <Typography variant="h5"> The easiest way to make flashcards from scratch</Typography>
+          <Typography variant="h3" gutterBottom> Unlock the power of Smart Learning with SmartFlash</Typography>
+          <Typography variant="h6" gutterBottom> Welcome to FlashLearn, the ultimate platform to enhance your memory and learning efficiency. 
+            Whether you're studying for exams, mastering a new language, or simply looking to boost your knowledge, 
+            FlashLearn offers a seamless and engaging flashcard experience designed to fit your needs
+            </Typography>
 
-          <Button variant="contained" color="primary" sx={{mt:2}}> Get Started</Button>
+            <Typography variant="h6" gutterBottom>Start your journey today and discover how easy and fun learning can be!</Typography>
+
+          <Button variant="contained" color="primary" sx={{mt:2}} onClick={handleGetStarted}> Get Started</Button>
         </Box>
 
         {/* Features Section */}
@@ -74,8 +91,10 @@ export default function Home() {
           <Grid container spacing={4}>
             {/* Feature 1 */}
             <Grid item xs={12} md={4}>
-              <Typography variant="h6" gutterBottom>Easy Text Input</Typography>
-              <Typography>Simply input your text and let our software do the rest</Typography>
+              <Box sx={{p:3, border: '1px solid', borderColor:'grey.300', borderRadius:2}}>
+                <Typography variant="h6" gutterBottom>Easy Text Input</Typography>
+                <Typography>Simply input your text and let our software do the rest</Typography>
+              </Box>
             </Grid>
             
             {/* Feature 2 */}
