@@ -22,8 +22,8 @@ export default function SignInPage(){
                 flexDirection={"column"}
                 alignItems="center"
                 justifyContent="center"
+                sx={{my:8}}
             >
-                <Typography>Login</Typography>
                 <SignIn/>
                
 

@@ -1,7 +1,6 @@
 import { SignIn, SignUp } from "@clerk/nextjs";
 import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function SignUpPage(){
     return (
@@ -21,8 +20,8 @@ export default function SignUpPage(){
                 flexDirection={"column"}
                 alignItems="center"
                 justifyContent="center"
+                sx={{my:8}}
             >
-                <Typography>Sign Up</Typography>
                 <SignUp/>
 
             </Box>
