@@ -14,6 +14,7 @@ function Generate() {
     const [text, setText] = useState('')
     const [name, setName] = useState('')
     const [open, setOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
     const [isClient, setIsClient] = useState(false)
 
@@ -26,12 +27,19 @@ function Generate() {
     }
 
     const handleSubmit = async () => {
+        setIsLoading(true)
         fetch('api/generate', {
             method: 'POST',
             body: text,
         })
         .then((res) => res.json())
-        .then((data) => setFlashcards(data))
+        .then((data) => {
+            setFlashcards(data)
+            setIsLoading(false)
+        })
+        .catch(() => {
+            setIsLoading(false)
+        })
     }
 
     const handleCardClick = (id) =>{
@@ -84,37 +92,50 @@ function Generate() {
     return (
         <Container maxWidth="md">
             <Box sx={{
-                mt:4, mb:6, display: 'flex', flexDirection: 'column', alignItems:'center'
+                mt:4, mb:6, display: 'flex', flexDirection: 'column', alignItems:'center', textAlign: 'center'
             }}>
-                <Typography variant="h4">Generate Flashcards</Typography>
-                <Paper sx={{p:4, width: '100%'}}>
+                <Typography variant="h4" gutterBottom  sx={{mt:4}}>Generate Flashcards</Typography>
+                <Typography variant="subtitle1" gutterBottom >Enter the text below to generate your flashcards</Typography>
+                <Paper sx={{p:4, width: '100%', maxWidth: 800, display: 'flex', flexDirection: 'column', alignItems:'center'}}>
                     <TextField
                         value={text}
                         onChange={(e) => setText(e.target.value)}
-                        label= "Enter text"
+                        label= "Enter text to generate flashcards"
                         fullWidth
                         multiline
-                        rows={4}
+                        rows={8}
                         variant="outlined"
                         sx={{mb:2}}
                     />
-                    <Button variant="contained" sx={{ mt: 2, mb:2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }} onClick={handleSubmit} fullWidth>
-                        Submit
+                    <Button 
+                        variant="contained" 
+                        sx={{ mt: 2, mb:2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' }, width: '300px' }} 
+                        onClick={handleSubmit} 
+                        disabled={!text.trim() || isLoading}
+                    >
+                        {isLoading ? 'Generating...' : 'Generate Flashcards'}
                     </Button>
+
+
                 </Paper>
             </Box>
 
 
             {flashcards.length > 0 && (
-                <Box sx={{mt:4}}>
-                    <Typography variant="h5">Flashcards Preview</Typography>
+                <Box sx={{ mt: 4, textAlign: "center" }}>
+                    <Typography variant="h5" sx={{ my: 4, mb: 4 }}>Flashcards Preview</Typography>
+                    <Typography variant="subtitle2" sx={{ mb: 4 }}>You have {flashcards.length} flashcards</Typography>
                     <Grid container spacing={3}>
                         {flashcards.map((flashcard, index) => (
                             <Grid item xs={12} sm={6} md={4} key={index}>
-                                <Card>
-                                    <CardActionArea
-                                        onClick={()=> {handleCardClick(index)}}
-                                    >
+                                <Card sx={{ 
+                                    transition: 'transform 0.3s, box-shadow 0.3s', 
+                                    '&:hover': { 
+                                        transform: 'scale(1.05)', 
+                                        boxShadow: '0 8px 16px rgba(0,0,0,0.3)' 
+                                    } 
+                                }}>
+                                    <CardActionArea onClick={() => { handleCardClick(index) }}>
                                         <CardContent>
                                             <Box sx={{
                                                 perspective: '1000px',
@@ -125,7 +146,7 @@ function Generate() {
                                                     width: '100%',
                                                     height: '200px',
                                                     boxShadow: '0 4px 8px 0 rgba(0,0,0, 0.2)',
-                                                    transform: flipped[index]? 'rotateY(180deg)' : 'rotateY(0deg)'
+                                                    transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)'
                                                 },
                                                 '& > div > div': {
                                                     position: 'absolute',
@@ -144,14 +165,14 @@ function Generate() {
                                             }}>
                                                 <div>
                                                     <div>
-                                                        <Typography variant="h5" component="div">
-                                                            {flashcard.front}
+                                                        <Typography variant="h6" component="div">
+                                                           <strong>Question:</strong> <br/> {flashcard.front}
                                                         </Typography>
                                                     </div>
 
                                                     <div>
-                                                        <Typography variant="h5" component="div">
-                                                            {flashcard.back}
+                                                        <Typography variant="h6" component="div">
+                                                           <strong>Answer:</strong> <br/> {flashcard.back}
                                                         </Typography>
                                                     </div>
                                                 </div>
@@ -164,13 +185,13 @@ function Generate() {
                         ))}
                     </Grid>
                     <Box sx={{mt:4, display:"flex", justifyContent:'center'}}>
-                        <Button variant="contained" sx={{ mt: 2, mb:2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }} onClick={handleOpen} fullWidth> Save</Button>
+                        <Button variant="contained" sx={{ mt: 2, mb:2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' }, width: '300px' }} onClick={handleOpen}> Save this collection</Button>
                     </Box>
                 </Box>
             )}
 
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Save Flashcards</DialogTitle>
+                <DialogTitle sx={{textAlign: 'center', fontWeight: 'bold'}}>Save Flashcards</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Please enter a name for your flashcards collection
