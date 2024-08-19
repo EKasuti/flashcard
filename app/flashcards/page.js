@@ -7,10 +7,15 @@ import { useEffect, useState } from 'react'
 import { db } from "@/firebase"
 import { useRouter } from 'next/navigation'
 
-export default function Flashcards(){
+function Flashcards() {
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([])
     const router = useRouter()
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
 
     useEffect(() => {
         async function getFlashcards(){
@@ -28,7 +33,7 @@ export default function Flashcards(){
         getFlashcards()
     }, [user])
 
-    if (!isLoaded || !isSignedIn){
+    if (!isLoaded || !isSignedIn || !isClient){
         return <></>
     }
 
@@ -54,3 +59,5 @@ export default function Flashcards(){
         </Container>
     )
 }
+
+export default Flashcards

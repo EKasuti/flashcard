@@ -1,13 +1,13 @@
 'use client'
 
 import { useUser } from "@clerk/nextjs"
-import { Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, TextField, Typography } from "@mui/material"
+import { Box, Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material"
 import { collection, doc, getDocs } from "firebase/firestore"
 import {use, useEffect, useState} from 'react'
 import { db } from "@/firebase"
 import { useSearchParams } from "next/navigation"
 
-export default function flachcard(){
+function Flashcard(){
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([])
     const [flipped, setFlipped] = useState({})
@@ -102,9 +102,10 @@ export default function flachcard(){
                             </Grid>
                         ))}
                     </Grid>
-                   
                 </Box>
             )}
         </Container>
     )
 }
+
+export default Flashcard

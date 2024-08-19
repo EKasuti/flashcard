@@ -5,9 +5,9 @@ import { db } from "@/firebase"
 import { Box, Button, Card, CardActionArea, CardContent, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, TextField, Typography } from "@mui/material"
 import { writeBatch, doc, collection, getDoc, setDoc } from "firebase/firestore"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
-export default function Generate() {
+function Generate() {
     const { isLoaded, isSignedIn, user } = useUser()
     const [flashcards, setFlashcards] = useState([])
     const [flipped, setFlipped] = useState({})
@@ -15,6 +15,15 @@ export default function Generate() {
     const [name, setName] = useState('')
     const [open, setOpen] = useState(false)
     const router = useRouter()
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) {
+        return null
+    }
 
     const handleSubmit = async () => {
         fetch('api/generate', {
@@ -187,3 +196,4 @@ export default function Generate() {
         </Container>
     )
 }
+export default Generate

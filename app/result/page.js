@@ -82,20 +82,14 @@ const ResultPage = () =>{
                    <Typography variant='h4'>Payment Failed</Typography>
                         <Box>
                             <Typography variant='body1'> 
-                                Your payment wasn't successful. Please try Again
+                                Your payment wasn&apos;t successful. Please try Again
                             </Typography>
                         </Box>
                    </> 
                 )
             }
-            
-           
-
         </Container>
     )
-
-
-
 }
 
 export default ResultPage
