@@ -77,9 +77,8 @@ export default function Home() {
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center",ml:{ xs:2, sm: 6}, mr:{ xs:2, sm: 6}, my:{ xs:2, sm: 10}, flexDirection: {xs: "column", sm: 'row'}}}>
         <Box sx={{ textAlign: { xs: 'center', sm: 'start' }, flex: 1, my:4 }}>
           <Typography variant="h4" gutterBottom> Unlock the power of Smart Learning with SmartFlash</Typography>
-          <Typography variant="h6" gutterBottom> Welcome to FlashLearn, the ultimate platform to enhance your memory and learning efficiency.
-            Whether you&apos;re studying for exams, mastering a new language, or simply looking to boost your knowledge,
-            FlashLearn offers a seamless and engaging flashcard experience designed to fit your needs
+          <Typography variant="h6" gutterBottom> Welcome to SmartFlash, the ultimate platform to enhance your memory and learning efficiency.
+            Whether you&apos;re studying for exams, or simply looking to boost your knowledge,
           </Typography>
           <Typography variant="h6" gutterBottom>Start your journey today and discover how easy and fun learning can be!</Typography>
           <Button variant="contained" sx={{ mt: 2, backgroundColor: 'darkblue', '&:hover': { backgroundColor: 'darkblue' } }} onClick={handleGetStarted}> Get Started</Button>
